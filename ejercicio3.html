@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3</title>
+</head>
+
+<body>
+    <div>
+        <div>
+            <h2>
+                Resultado: <span class="resultado"></span>
+            </h2>
+            <div>
+                <div>
+                    <div>
+                        <label for="">Valor 1</label>
+                        <input id="valor1" type="text">
+                    </div>
+                    <div>
+                        <label for="">Valor 2</label>
+                        <input id="valor2" type="text">
+                    </div>
+                    <div style="display: flex">
+                        <button id="btn-sumar" type="button">
+                            Sumar
+                        </button>
+                        <button id="btn-restar" type="button">
+                            Restar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        // Definir variable para botones, inputs y resultado.
+        let boton = document.querySelectorAll('button');
+        let datos = document.querySelectorAll('input');
+        let resultado = document.querySelector('.resultado');
+
+        // Se activa un listener para el evento click a botón de "Sumar". Se crea variable resultadoSuma para realizar y almacenar la suma de los datos.
+        boton[0].addEventListener('click', () => {
+            let resultadoSuma = parseInt(datos[0].value) + parseInt(datos[1].value);
+            // Se reemplaza el resultado obtenido en el código, con innerHTML para que se vea en la página.
+            resultado.innerHTML = resultadoSuma;
+        })
+
+        // Se activa un listener para el evento click a botón de "Restar". Se crea variable resultadoResta para realizar y almacenar la resta de los datos.
+        boton[1].addEventListener('click', () => {
+            let resultadoResta = parseInt(datos[0].value) - parseInt(datos[1].value);
+            // Se platea condicional para valores del resultado menor a 0. Si cumple, el resultado será 0, de lo contrario mostrará el resultado de la resta.
+            if (resultadoResta<0) {
+                resultado.innerHTML = 0;
+            } else {
+                resultado.innerHTML = resultadoResta;
+            }
+            
+        })
+
+    </script>
+</body>
+
+</html>

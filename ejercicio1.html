@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <div>
+        <div style="width: 40%;margin: 0 auto">
+            <h2>
+                Escríbenos !!!
+            </h2>
+            <div class="resultado" style="color:green;font-style: italic">
+            </div>
+            <form id="formulario">
+                <div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Nombre completo
+                        </label>
+                        <input id="nombre" type="text">
+                        <p class="errorNombre" style="color:red;font-style: italic;"></p>
+                    </div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Asunto
+                        </label>
+                        <input id="asunto" type="text">
+                        <p class="errorAsunto" style="color:red;font-style: italic;"></p>
+                    </div>
+                </div>
+                <div style="display: flex;flex-direction: column;">
+                    <label>
+                        Mensaje
+                    </label>
+                    <textarea id="mensaje"></textarea>
+                    <p class="errorMensaje" style="color:red;font-style: italic;"></p>
+                </div>
+                <div style="text-align: center;">
+                    <button id="botton" type="submit">
+                        Envíar mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+
+        // Se activa un listener para el evento submit y luego desencadena un "eventoRefresh" para prevenir el evento de refrescar el formulario que tiene por defecto.
+        document.addEventListener('submit', (eventoRefresh)=>{
+            eventoRefresh.preventDefault();
+            // Capta todos los mensajes de error cambiando el mensaje por uno en blanco ""  (para resetear).
+            document.querySelectorAll('.errorNombre,.errorAsunto,.errorMensaje,.resultado')
+            .forEach(punto => punto.innerHTML = "");
+
+            // Crear variable y seleccionar valores dentro del código. Son los datos de interés que rellena el ususario en el formulario.
+            let datos = document.querySelectorAll('input, textarea')
+
+            // Se crea array vacío para guardar los valores de los datos de interés.
+            let datosValues = [];
+
+            // Se evalua cada dato ingresado por el ususario si cumplen con el RegEx. Si cumple el dato será almacenado, de lo contrario, buscará el elemento hermano al cuál se le añadirá un mensaje "tipo" (`El campo completado es erróneo`).
+            for(let i = 0; i<datos.length;i++){
+                if(/^[a-zA-Z\s]+$/.test(datos[i].value)){
+                    datosValues.push(datos[i].value)
+                }else {
+                    datos[i].nextElementSibling.innerHTML = `EL punto es erroneo`
+                }
+            }
+            // Se evalúa el largo del array datosValues, con la condicional de ser mayor a 3 para poder avanzar.
+            if(datosValues.length>2){
+                // En caso de éxito, se introduce un mensaje de resultado enviado y se limpian los datos, reseteando el formulario
+                document.querySelector('.resultado').innerHTML = `Mensaje enviado con exito!!!`;
+                evento.target.reset()
+            }
+        })
+
+        
+
+    </script>
+
+</body>
+
+</html>
